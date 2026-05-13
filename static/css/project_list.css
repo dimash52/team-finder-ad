@@ -234,3 +234,11 @@
     text-decoration: underline;
     color: #666;
 }
+
+.pagination {
+    margin: 32px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
