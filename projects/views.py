@@ -34,8 +34,7 @@ def index(request: HttpRequest):
 
 
 def project_list(request: HttpRequest):
-    projects = paginate_queryset(
-        request, _project_queryset(), PROJECTS_PER_PAGE)
+    projects = paginate_queryset(request, _project_queryset(), PROJECTS_PER_PAGE)
     return render(request, "projects/project_list.html", {"projects": projects})
 
 
@@ -52,8 +51,7 @@ def favorite_projects(request: HttpRequest):
 
 def project_detail(request: HttpRequest, pk: int):
     project = get_object_or_404(
-        Project.objects.select_related(
-            "owner").prefetch_related("participants"),
+        Project.objects.select_related("owner").prefetch_related("participants"),
         pk=pk,
     )
     return render(request, "projects/project-details.html", {"project": project})

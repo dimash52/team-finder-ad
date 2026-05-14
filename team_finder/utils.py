@@ -63,8 +63,7 @@ def clean_phone(phone: str, user_model, instance=None) -> str:
     phone = validate_phone_format(phone)
 
     legacy_phone = "8" + phone[2:] if phone.startswith("+7") else phone
-    users_with_same_phone = user_model.objects.filter(
-        phone__in=[phone, legacy_phone])
+    users_with_same_phone = user_model.objects.filter(phone__in=[phone, legacy_phone])
 
     if instance and instance.pk:
         users_with_same_phone = users_with_same_phone.exclude(pk=instance.pk)
@@ -115,8 +114,7 @@ def generate_initial_avatar(name: str, email: str) -> ContentFile:
 
     position = (
         (AVATAR_IMAGE_SIZE - text_width) / AVATAR_CENTER_DIVISOR,
-        (AVATAR_IMAGE_SIZE - text_height) / AVATAR_CENTER_DIVISOR
-        - AVATAR_VERTICAL_OFFSET,
+        (AVATAR_IMAGE_SIZE - text_height) / AVATAR_CENTER_DIVISOR - AVATAR_VERTICAL_OFFSET,
     )
 
     draw.text(position, letter, fill=AVATAR_TEXT_COLOR, font=font)

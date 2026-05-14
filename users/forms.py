@@ -37,9 +37,7 @@ class RegisterForm(forms.ModelForm):
         widgets = {
             "name": forms.TextInput(attrs={"placeholder": "Имя"}),
             "surname": forms.TextInput(attrs={"placeholder": "Фамилия"}),
-            "email": forms.EmailInput(
-                attrs={"placeholder": "Email", "autocomplete": "email"}
-            ),
+            "email": forms.EmailInput(attrs={"placeholder": "Email", "autocomplete": "email"}),
         }
 
     def save(self, commit=True):

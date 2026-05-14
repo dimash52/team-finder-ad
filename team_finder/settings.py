@@ -4,6 +4,7 @@ import os
 try:
     from decouple import config  # type: ignore
 except ImportError:  # Allows basic checks before dependencies are installed.
+
     def config(key, default=None, cast=None):
         value = os.environ.get(key, default)
         if cast is bool and isinstance(value, str):

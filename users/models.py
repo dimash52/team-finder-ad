@@ -40,8 +40,7 @@ REQUIRED_FIELDS = ["name", "surname"]
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(USER_EMAIL_VERBOSE_NAME, unique=True)
-    name = models.CharField(USER_NAME_VERBOSE_NAME,
-                            max_length=USER_NAME_MAX_LENGTH)
+    name = models.CharField(USER_NAME_VERBOSE_NAME, max_length=USER_NAME_MAX_LENGTH)
     surname = models.CharField(
         USER_SURNAME_VERBOSE_NAME,
         max_length=USER_SURNAME_MAX_LENGTH,

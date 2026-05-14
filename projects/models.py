@@ -26,8 +26,7 @@ class Project(models.Model):
         related_name="owned_projects",
         verbose_name="owner",
     )
-    created_at = models.DateTimeField(
-        "created_at", auto_now_add=True, db_index=True)
+    created_at = models.DateTimeField("created_at", auto_now_add=True, db_index=True)
     github_url = models.URLField("github_url", blank=True)
     status = models.CharField(
         "status",

@@ -17,7 +17,12 @@ class Command(BaseCommand):
         for email, name, surname, phone in demo_users:
             user, created = User.objects.get_or_create(
                 email=email,
-                defaults={"name": name, "surname": surname, "phone": phone, "about": "Участник TeamFinder"},
+                defaults={
+                    "name": name,
+                    "surname": surname,
+                    "phone": phone,
+                    "about": "Участник TeamFinder",
+                },
             )
             if created:
                 user.set_password("demo12345")
@@ -37,4 +42,6 @@ class Command(BaseCommand):
             project.participants.add(user)
 
         users[0].favorites.add(Project.objects.exclude(owner=users[0]).first())
-        self.stdout.write(self.style.SUCCESS("Demo data created. Password for all demo users: demo12345"))
+        self.stdout.write(
+            self.style.SUCCESS("Demo data created. Password for all demo users: demo12345")
+        )

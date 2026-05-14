@@ -56,20 +56,16 @@ class ProjectFlowTests(TestCase):
     def test_authenticated_user_can_toggle_favorite(self):
         self.client.force_login(self.member)
 
-        response = self.client.post(
-            reverse("projects:toggle_favorite", args=[self.project.pk])
-        )
+        response = self.client.post(reverse("projects:toggle_favorite", args=[self.project.pk]))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTrue(response.json()[FAVORITED_RESPONSE_KEY])
-        self.assertTrue(self.member.favorites.filter(
-            pk=self.project.pk).exists())
+        self.assertTrue(self.member.favorites.filter(pk=self.project.pk).exists())
 
     def test_owner_can_complete_project(self):
         self.client.force_login(self.owner)
 
-        response = self.client.post(
-            reverse("projects:complete", args=[self.project.pk]))
+        response = self.client.post(reverse("projects:complete", args=[self.project.pk]))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.project.refresh_from_db()
@@ -78,11 +74,8 @@ class ProjectFlowTests(TestCase):
     def test_participation_toggle(self):
         self.client.force_login(self.member)
 
-        response = self.client.post(
-            reverse("projects:toggle_participate", args=[self.project.pk])
-        )
+        response = self.client.post(reverse("projects:toggle_participate", args=[self.project.pk]))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTrue(response.json()[PARTICIPANT_RESPONSE_KEY])
-        self.assertTrue(self.project.participants.filter(
-            pk=self.member.pk).exists())
+        self.assertTrue(self.project.participants.filter(pk=self.member.pk).exists())
